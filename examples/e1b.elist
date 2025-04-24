@@ -1,0 +1,5 @@
+AA BB { 'cost': 2 }
+BB CC { 'cost': 1 }
+CC EE { 'cost': 1 }
+AA DD { 'cost': 1 }
+DD EE { 'cost': 2 }

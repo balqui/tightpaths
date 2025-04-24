@@ -1,0 +1,6 @@
+A B { 'cost': 2 }
+B C { 'cost': 1 }
+C A { 'cost': 1 }
+A D { 'cost': 1 }
+D E { 'cost': 2 }
+E A { 'cost': 1 }
