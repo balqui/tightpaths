@@ -54,15 +54,16 @@ if __name__ == "__main__":
     # g = nx.read_edgelist("e3.elist", create_using = nx.DiGraph) # CAREFUL, LOOPY
     # g = nx.read_edgelist("e4.elist", create_using = nx.DiGraph) # CAREFUL, ZEROLOOPY
 
-    fnm = input("Graph filename? (.list assumed) ")
+    fnm = '../examples/' + input("Graph filename? (.list assumed) ")
+    # ~ fnm = '../scaff/makegraphs/' + input("Graph filename? (.list assumed) ")
     g = nx.read_edgelist(fnm + ".elist", create_using = nx.DiGraph)
     nx.set_edge_attributes(g, 'above', 'elabel')
-    if input(f"Write LaTex drawing {fnm}.tex? "):
-        'create a TikZ diagram'
-        nx.write_latex(g, fnm + ".tex", 
-                       edge_label = 'cost',
-                       edge_label_options = 'elabel') 
-        # ADD as_document = False FOR INCLUSION IN A LARGER TEXT
+    # ~ if input(f"Write LaTex drawing {fnm}.tex? "):
+        # ~ 'create a TikZ diagram - BAD CHOICE, WRONG LAYOUT'
+        # ~ nx.write_latex(g, fnm + ".tex", 
+                       # ~ edge_label = 'cost',
+                       # ~ edge_label_options = 'elabel') 
+        # ~ # ADD as_document = False FOR INCLUSION IN A LARGER TEXT
     bound = input("Bound? (<CR> to finish) ")
     while bound:
         for start_node in g:
