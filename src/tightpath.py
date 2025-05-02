@@ -64,7 +64,7 @@ if __name__ == "__main__":
                        # ~ edge_label = 'cost',
                        # ~ edge_label_options = 'elabel') 
         # ~ # ADD as_document = False FOR INCLUSION IN A LARGER TEXT
-    bound = input("Bound? (<CR> to finish) ")
+    bound = input("Bound? (<RET> to finish) ")
     while bound:
         for start_node in g:
             for path in tight_paths(g, start_node, float(bound)):
