@@ -3,7 +3,7 @@ Jose Luis Balcazar, balqui at GitHub
 Early Floreal 2025
 MIT License
 
-Find tight pairs in a directed graph. 
+Find tight paths in a directed graph. 
 Follows in part the function edge_dfs of the NetworkX package,
 but simplified as we don't need dfs order on the edges.
 
