@@ -12,6 +12,8 @@ Log-based edges assumed, so the algorithm is a simpler dfs.
 
 import networkx as nx
 
+from time import time
+
 def tight_pairs(g, u, bound):
     '''
     All tight pairs from u under bound b.
@@ -46,9 +48,14 @@ if __name__ == "__main__":
     bound = input("Bound? (<RET> to finish) ")
     while bound:
         "use -log(desired confidence) [minus some epsilon] as bound"
+        tacc = 0
         for start_node in g:
-            for pair in tight_pairs(g, start_node, float(bound)):
+            t = time()
+            tps = tight_pairs(g, start_node, float(bound))
+            tacc += time() - t
+            for pair in tps: # tight_pairs(g, start_node, float(bound)):
                 if pair[0] != pair[1]:
                     "1-vertex paths often not useful"
                     print(pair)
+        input(f"Time: {tacc:7.4f}")
         bound = input("Bound? (<CR> to finish) ")

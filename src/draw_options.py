@@ -1,3 +1,6 @@
+
+# 0.6411857 e:0.0079(0.0031) s:0.0046 g:0.0176
+
 import networkx as nx
 
 def tr_elabel(g, wlog):

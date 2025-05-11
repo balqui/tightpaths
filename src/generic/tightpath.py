@@ -13,6 +13,8 @@ and target vertices in this order, plus a dictionary with,
 at least, the key 'cost' and a positive number as cost value.
 '''
 
+from time import time
+
 import networkx as nx
 
 from pathtree import PathTree
@@ -55,9 +57,14 @@ if __name__ == "__main__":
     # ~ nx.set_edge_attributes(g, 'above', 'elabel')
     bound = input("Bound? (<RET> to finish) ")
     while bound:
+        tacc = 0
         for start_node in g:
-            for path in tight_paths(g, start_node, float(bound)):
+            t = time()
+            tps = tight_paths(g, start_node, float(bound))
+            tacc += time() - t
+            for path in tps: # tight_paths(g, start_node, float(bound)):
                 if len(path) > 1:
                     "1-vertex paths often not useful"
                     print(path)
+        input(f"Time: {tacc:7.4f}")
         bound = input("Bound? (<CR> to finish) ")
