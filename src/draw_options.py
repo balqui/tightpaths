@@ -1,6 +1,19 @@
+'''
+Ideas for reorganization:
+ - folder with general graphs, no dataset
+ - folder with closure spaces, both dataset and logsupp files
+ - folder with programs to make the logsupp files from datasets
+ - somewhere, text file with dataset sizes
+ - somewhere, programs making the .gv representations 
+   - this file I guess
+   - unclear about the log scale dialog
 
-# 0.6411857 e:0.0079(0.0031) s:0.0046 g:0.0176
-
+Almost fixpoint conf = -log of itself: 0.6411857 
+Times for the fixpoint: 
+early: 0.0079 (0.0031 before tighten) 
+simple: 0.0046 
+generic: 0.0176
+'''
 import networkx as nx
 
 def tr_elabel(g, wlog):
