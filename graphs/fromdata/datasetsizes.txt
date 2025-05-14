@@ -4,7 +4,8 @@ e5b: 10
 e13: 13
 e13b: 13
 e24: 24
-
+lenshort:24
+markbask: 1000
 toy_0: 12
 toy_1: 7
 toy_2: 12
