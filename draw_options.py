@@ -46,6 +46,6 @@ if task == 'v':
     for u in g:
         rl[u] = u + '  ' + str(g.nodes[u]['weight'])
     g = nx.relabel.relabel_nodes(g, rl)
-    fnm += "_relab"
+    fnm += "_vlab"
 nx.nx_agraph.write_dot(g, fnm + ".gv")
 print("Wrote", fnm + ".gv")

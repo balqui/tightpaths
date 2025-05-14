@@ -1,11 +1,11 @@
-NOW1: 1597
+NOW1: 1597 (328 closures)
 e5: 14
 e5b: 10
 e13: 13
 e13b: 13
 e24: 24
-lenshort:24
-markbask: 1000
+lenshort: 24 (105 + 24 = 129 closures)
+markbask: 1000 (2652 + 117 = 2769 closures)
 toy_0: 12
 toy_1: 7
 toy_2: 12
