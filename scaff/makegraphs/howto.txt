@@ -1,0 +1,2 @@
+To create graphs from datasets: ensure all the python files with import 
+targets are present here, run python3 lattice.py and answer the questions.

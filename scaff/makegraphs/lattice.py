@@ -148,37 +148,21 @@ class Lattice(dict):
 
         n, t = ('_logsupp', auxlog) if wlog else ('_supp', lambda x, y: x - y)
 
-        print("Write", fullfnm := fnm + n + '.elist')
+        print("Writing", fullfnm := fnm + n + '.elist')
 
         with open(fullfnm, 'w') as outf:
             d = { 'cost' : 0 }
             for e in self:
                 for p in self[e]:
                     d['cost'] = t(p.supp, e.supp)
-                    # ~ print(_str(p), _str(e), str(d), p.supp, e.supp)
                     print(_str(p), _str(e), str(d), file = outf)
+
 
 
 if __name__=="__main__":
 
     from filenames import FileNames
     from hyperparam import HyperParam
-
-    # ~ def printclos(la, a):
-        # ~ print("\nClosure: ", a, a.supp)
-        # ~ print("imm preds:")
-        # ~ for e in la[a]: print(e, ",") #,
-        # ~ print()
-        # ~ print("all preds:")
-        # ~ for e in la.allpreds(a): print(e, ",") #,
-        # ~ print("supp ratio:", a.suppratio)
-
-        # ~ if a in la.suppratios:
-            # ~ print("supp ratio:", la.suppratios[a])
-        # ~ else:
-            # ~ print("no supp ratio for", a)
-
-        # ~ print("\n\n")
 
     # ~ fnm = "e13"
     # ~ fnm = "e24"
@@ -203,18 +187,24 @@ if __name__=="__main__":
     la = Lattice(d)
 
     closlist = list()
+    ok = False
     for a in la.candidate_closures():
-        # ~ print("\n\nNew closure:")
-        # ~ printclos(la, a)
-        closlist.append(a)
+        if ok:
+            "fast test beyond empty set closure"
+            closlist.append(a)
+            continue
+        if not closlist and len(a):
+            "first to come, closure of empty set, not empty"
+            print("Nonempty closure of empty set, exiting.")
+            exit(1)
+        else:
+            "closure of empty set empty, go on"
+            closlist.append(a)
+            ok = True
 
-    # ~ print("At end:")
-    for i, a in enumerate(closlist):
-        print(i, "/", a)
-        # ~ printclos(la, a)
+    # ~ for i, a in enumerate(closlist):
+        # ~ print(i, "/", a)
 
-    # ~ print(la)
     print(len(closlist), "closures in the lattice.")
     # ~ wlog = 'y' == input("Log scale? [y/n] ")
     la.edgelist(fnm, wlog = True)
-    la.edgelist(fnm, wlog = False)

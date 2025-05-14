@@ -7,8 +7,8 @@ Tight pairs with vertex weights via the old slatt approach of tightening.
 
 Find tight paths in a directed, acyclic, vertex-weighted graph. 
 Graphs are NetworkX DiGraphs read from edge lists (see tightpath.py).
-Edge costs expected to be the support differences, "_supp.elists" files,
-needs the dataset size to recover the supports.
+Edge costs expected to be the log of support quotients, "_logsupp.elists" 
+files, needs the dataset size to recover the supports.
 '''
 
 import networkx as nx
@@ -67,7 +67,7 @@ def setweights(g, u):
     "dfs scheme to set up weights on vertices from the edge differences"
     for v in g.neighbors(u):
         if 'weight' not in g.nodes[v]:
-            g.nodes[v]['weight'] = g.nodes[u]['weight'] - g[u][v]['cost']
+            g.nodes[v]['weight'] = round(g.nodes[u]['weight'] / 2**g[u][v]['cost'])
             print("Weight:", v, g.nodes[v]['weight'])
             setweights(g, v)
 
