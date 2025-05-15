@@ -1,6 +1,6 @@
 '''
 Jose Luis Balcazar, balqui at GitHub
-Mid Floreal 2025
+Mid Floreal 2025, cosmetic touches by late Floreal.
 MIT License
 
 Tight pairs with vertex weights.
@@ -14,29 +14,31 @@ import networkx as nx
 
 from time import time
 
-def tight_pairs(g, u, bound):
+EPS = 0.000001 # float precision issues
+
+def tight_pairs(g, root, bound):
     '''
-    All tight pairs from u under bound b.
-    Could be made an iterator.
+    All tight pairs under bound where the 
+    first component is that root.
     '''
-    ret_pairs = list()
     cl_pred = float("inf")
-    for v in g.predecessors(u):
+    for u in g.predecessors(root):
         "Find distance to closest predecessor, inf if no predecessor"
-        cl_pred = min(cl_pred, g[v][u]['cost'])
-    stack = [ (u, 0) ]
+        cl_pred = min(cl_pred, g[u][root]['cost'])
+    ret_pairs = list()
     seen = set()
+    stack = [ (root, 0) ]
     while stack:
         v, d = stack.pop()
         seen.add(v)
-        ext = False
-        for w in g.neighbors(v):
-            if d + g[v][w]['cost'] <= bound:
-                if w not in seen:
-                    stack.append( (w, d + g[v][w]['cost']) )
-                ext = True
-        if not ext and cl_pred + d > bound:
-            ret_pairs.append((u, v)) # THERE MAY BE REFLEXIVE PAIRS
+        mayextend = False
+        for u in g.neighbors(v):
+            if d + g[v][u]['cost'] <= bound + EPS:
+                if u not in seen:
+                    stack.append( (u, d + g[v][u]['cost']) )
+                mayextend = True
+        if not mayextend and cl_pred + d > bound - EPS:
+            ret_pairs.append((root, v)) # THERE MAY BE REFLEXIVE PAIRS
     return ret_pairs
 
 if __name__ == "__main__":
