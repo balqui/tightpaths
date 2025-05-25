@@ -43,9 +43,7 @@ def tight_pairs(g, root, bound):
 
 if __name__ == "__main__":
 
-    fnm = input("Graph filename? (.list assumed) ")
-    # ~ fnm = '../examples/' + input("Graph filename? (.list assumed) ")
-    # ~ fnm = '../scaff/makegraphs/' + input("Graph filename? (.list assumed) ")
+    fnm = input("Graph filename? (.elist assumed) ")
     g = nx.read_edgelist(fnm + ".elist", create_using = nx.DiGraph)
     bound = input("Bound? (<RET> to finish) ")
     while bound:

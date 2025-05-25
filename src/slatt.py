@@ -1,9 +1,11 @@
 '''
 Jose Luis Balcazar, balqui at GitHub
-Late Floreal 2025
+Late Floreal and early Prairial 2025
 MIT License
 
-Tight pairs with vertex weights via the old slatt approach of tightening.
+Tight pairs with vertex weights via the old slatt approach of 
+correspondence tightening. Variable and class names still follow
+slatt conventions, to be renamed into graph-theoretic notions.
 
 Find tight paths in a directed, acyclic, vertex-weighted graph. 
 Graphs are NetworkX DiGraphs read from edge lists (see tightpath.py).
@@ -16,7 +18,7 @@ import networkx as nx
 from time import time
 
 class corr(dict):
-    "right-tightening, we do left-tightening in minants"
+    "right-tightening, we do left-tightening separately for now"
 
     def __init__(self):
         dict.__init__(self)
@@ -35,7 +37,8 @@ class corr(dict):
 
 def minants(clspace, closure, thr):
     """
-    finds in preds of closure min thr-antecedents.
+    Finds in preds of closure min thr-antecedents.
+    To be moved to the corr class.
     """
     yesants = [] # nearly enough predecessors
     for m in clspace.pred[closure]:
@@ -68,7 +71,7 @@ def setweights(g, u):
     for v in g.neighbors(u):
         if 'weight' not in g.nodes[v]:
             g.nodes[v]['weight'] = round(g.nodes[u]['weight'] / 2**g[u][v]['cost'])
-            print("Weight:", v, g.nodes[v]['weight'])
+            # ~ print("Weight:", v, g.nodes[v]['weight'])
             setweights(g, v)
 
 def unpack(u):
@@ -99,7 +102,7 @@ class ClSpace:
 
 if __name__ == "__main__":
 
-    fnm = input("Graph filename? (.list assumed) ")
+    fnm = input("Graph filename? (.elist assumed) ")
     g = nx.read_edgelist(fnm + ".elist", create_using = nx.DiGraph)
     g.nodes['__']['weight'] = int(input("Dataset length? "))
     setweights(g, '__')
