@@ -60,7 +60,7 @@ def tight_pairs(g, root, bound):
 
 if __name__ == "__main__":
 
-    fnm = input("Graph filename? (.leist assumed) ")
+    fnm = input("Graph filename? (.elist assumed) ")
     g = nx.read_edgelist(fnm + ".elist", create_using = nx.DiGraph)
     g.nodes['__']['weight'] = 0 # log(int(input("Dataset length? ")), 2)
     setweights(g, '__')
