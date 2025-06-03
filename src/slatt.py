@@ -40,7 +40,10 @@ def minants(clspace, closure, thr):
     Finds in preds of closure min thr-antecedents.
     To be moved to the corr class.
     """
-    yesants = [] # nearly enough predecessors
+    # normally we do not include paths of length one
+    # ~ yesants = [] # nearly enough predecessors
+    # but we do now, so as to compare fairly to tight pairs algorithms
+    yesants = [ closure ] 
     for m in clspace.pred[closure]:
         "discards far-away predecessors"
         if clspace.supp[closure] >= thr * clspace.supp[m]:
@@ -58,12 +61,12 @@ def minants(clspace, closure, thr):
 def tpairs(clspace, threshold):
     "slatt approach, clspace obtained from graph for now"
     pairs = corr()
-    t = time()
+    # ~ t = time()
     for closure in clspace.pred:
         pairs[closure] = minants(clspace, closure, threshold)
-    tm = time()
+    # ~ tm = time()
     pairs.tighten()
-    input(f"Time: {time() - t:7.4f}, of which {tm - t:7.4f} before tightening.")
+    # ~ input(f"Time: {time() - t:7.4f}, of which {tm - t:7.4f} before tightening.")
     return pairs
 
 def setweights(g, u):
@@ -71,7 +74,6 @@ def setweights(g, u):
     for v in g.neighbors(u):
         if 'weight' not in g.nodes[v]:
             g.nodes[v]['weight'] = round(g.nodes[u]['weight'] / 2**g[u][v]['cost'])
-            # ~ print("Weight:", v, g.nodes[v]['weight'])
             setweights(g, v)
 
 def unpack(u):
