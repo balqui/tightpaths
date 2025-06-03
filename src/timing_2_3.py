@@ -50,7 +50,7 @@ fig, ax = plt.subplots()
 ax.plot(thrs, plotcol0, label = "Paths (alg. 2)")
 ax.plot(thrs, plotcol1, label = "Pairs (alg. 3)")
 
-ax.set(xlabel='Threshold', ylabel='time (sec)',
+ax.set(xlabel='threshold', ylabel='time (sec)',
        title='Tight paths versus tight pairs: time comparison')
 ax.grid()
 
