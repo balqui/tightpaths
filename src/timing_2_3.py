@@ -47,8 +47,10 @@ for thr in thrs:
 	plotcol1.append(t2 - t1)
 
 fig, ax = plt.subplots()
-ax.plot(thrs, plotcol0, label = "Paths (alg. 2)")
-ax.plot(thrs, plotcol1, label = "Pairs (alg. 3)")
+# ~ ax.plot(thrs, plotcol0, label = "Paths (alg. 2)", marker = 'o')
+# ~ ax.plot(thrs, plotcol1, label = "Pairs (alg. 3)", marker = '^')
+ax.plot(thrs, plotcol0, label = "Paths (alg. 2)", dashes = [1, 1])
+ax.plot(thrs, plotcol1, label = "Pairs (alg. 3)", dashes = [5, 1])
 
 ax.set(xlabel='threshold', ylabel='time (sec)',
        title='Tight paths versus tight pairs: time comparison')

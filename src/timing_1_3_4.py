@@ -8,18 +8,18 @@ from math import log
 import networkx as nx
 import matplotlib.pyplot as plt
 
-def partprint(ls, gr, grcs):
-	"skip single-vertex paths"
-	cnt = 0
-	for (s, t) in ls:
-		if s != t: 
-			cnt += 1
-			print(f"{cnt}/ {s} {gr.nodes[s]['weight']} {grcs.supp[unpack(s)]} --  {t} {gr.nodes[t]['weight']} {grcs.supp[unpack(t)]}")
+# ~ def partprint(ls, gr, grcs):
+	# ~ "skip single-vertex paths"
+	# ~ cnt = 0
+	# ~ for (s, t) in ls:
+		# ~ if s != t: 
+			# ~ cnt += 1
+			# ~ print(f"{cnt}/ {s} {gr.nodes[s]['weight']} {grcs.supp[unpack(s)]} --  {t} {gr.nodes[t]['weight']} {grcs.supp[unpack(t)]}")
 
-dlen = 1597 # number of transactions in dataset
-gr = nx.read_edgelist("../graphs/fromdata/NOW1_logsupp.elist", 
-# ~ dlen = 1000
-# ~ gr = nx.read_edgelist("../graphs/fromdata/markbask_logsupp.elist", 
+# ~ dlen = 1597 # number of transactions in dataset
+# ~ gr = nx.read_edgelist("../graphs/fromdata/NOW1_logsupp.elist", 
+dlen = 1000
+gr = nx.read_edgelist("../graphs/fromdata/markbask_logsupp.elist", 
 # ~ dlen = 13
 # ~ gr = nx.read_edgelist("../graphs/fromdata/e13b_logsupp.elist", 
                      create_using = nx.DiGraph)
@@ -80,15 +80,15 @@ for thr in thrs:
 	plotcol2.append((t3 - t2) / rep)
 
 fig, ax = plt.subplots()
-ax.plot(thrs, plotcol0, label = "Alg. 1")
-ax.plot(thrs, plotcol1, label = "Alg. 3")
-ax.plot(thrs, plotcol2, label = "Alg. 4")
+ax.plot(thrs, plotcol0, label = "Alg. 1", dashes = [1, 1])
+ax.plot(thrs, plotcol1, label = "Alg. 3", dashes = [3, 1])
+ax.plot(thrs, plotcol2, label = "Alg. 4", dashes = [5, 2])
 
 ax.set(xlabel='threshold', ylabel='time (sec)',
        title='Tight pair algorithms: time comparison')
 ax.grid()
 
 fig.legend(loc='center right')
-fig.savefig("timing_1_3_4_NOW1.png")
+fig.savefig("timing_1_3_4_markbask.png")
 plt.show()
 
